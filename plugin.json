@@ -1,0 +1,9 @@
+{
+    "id": "openlist.driver.baidu_share",
+    "name": "Baidu Share Driver",
+    "version": "0.0.1",
+    "author": "foxxorcat",
+    "description": "Openlist Baidu Share Plugin",
+    "homepage": "https://github.com/OpenListTeam/openlist-baidushare-plugin",
+    "icon_url": ""
+}
