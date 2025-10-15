@@ -56,7 +56,9 @@ jobs:
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       - name: Build without -no-debug (debug version)
-        run: tinygo build -target=wasip1 -buildmode=c-shared -scheduler asyncify -o plugin.wasm .
+        run: |
+          export TINYGOROOT=/usr/local/lib/tinygo
+          tinygo build -target=wasip1 -buildmode=c-shared -scheduler asyncify -o plugin.wasm .
 
       - name: Package debug version
         run: zip plugin-debug-${{ steps.vars.outputs.sha_short }}.zip plugin.wasm plugin.json
