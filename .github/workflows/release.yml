@@ -1,0 +1,45 @@
+name: Release Plugin
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.25.2'
+
+      - name: Install TinyGo
+        run: |
+          wget https://github.com/tinygo-org/tinygo/releases/download/v0.29.0/tinygo_0.29.0_amd64.deb
+          sudo dpkg -i tinygo_0.29.0_amd64.deb
+          rm tinygo_0.29.0_amd64.deb
+
+      - name: Build with -no-debug
+        run: tinygo build -target=wasip1 -no-debug -buildmode=c-shared -scheduler asyncify -o plugin.wasm .
+
+      - name: Package release version
+        run: zip plugin-release-${{ github.ref_name }}.zip plugin.wasm plugin.json
+
+      - name: Build without -no-debug (debug version)
+        run: tinygo build -target=wasip1 -buildmode=c-shared -scheduler asyncify -o plugin.wasm .
+
+      - name: Package debug version
+        run: zip plugin-debug-${{ github.ref_name }}.zip plugin.wasm plugin.json
+
+      - name: Create Release and Upload Assets
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            plugin-release-${{ github.ref_name }}.zip
+            plugin-debug-${{ github.ref_name }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

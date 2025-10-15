@@ -1,0 +1,46 @@
+name: Build Debug Plugin
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          # For PRs, check out the head of the PR branch
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.25.2'
+
+      - name: Install TinyGo
+        run: |
+          wget https://github.com/tinygo-org/tinygo/releases/download/v0.29.0/tinygo_0.29.0_amd64.deb
+          sudo dpkg -i tinygo_0.29.0_amd64.deb
+          rm tinygo_0.29.0_amd64.deb
+          
+      - name: Get short commit hash
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Build without -no-debug (debug version)
+        run: tinygo build -target=wasip1 -buildmode=c-shared -scheduler asyncify -o plugin.wasm .
+
+      - name: Package debug version
+        run: zip plugin-debug-${{ steps.vars.outputs.sha_short }}.zip plugin.wasm plugin.json
+
+      - name: Upload Artifacts for Debug Build
+        uses: actions/upload-artifact@v4
+        with:
+          name: plugin-debug-build-${{ steps.vars.outputs.sha_short }}
+          path: plugin-debug-${{ steps.vars.outputs.sha_short }}.zip
