@@ -8,6 +8,8 @@ on:
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # <-- 添加此权限设置
     steps:
       - name: Check out code
         uses: actions/checkout@v4
