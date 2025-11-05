@@ -2,6 +2,8 @@ github.com/OpenListTeam/go-wasi-http v0.0.0-20251015142022-5647e49e373d h1:1S2xx
 github.com/OpenListTeam/go-wasi-http v0.0.0-20251015142022-5647e49e373d/go.mod h1:cr3jWoLx01AOUORqyTRRaeghzvktY3nQ/TkFhp1LIbY=
 github.com/OpenListTeam/openlist-wasi-plugin-driver v0.0.0-20251015133414-5b50219c1270 h1:zZmAITIiV/BqQCe/ma2qvPX5+qnTq1eflYcGuv0kKMQ=
 github.com/OpenListTeam/openlist-wasi-plugin-driver v0.0.0-20251015133414-5b50219c1270/go.mod h1:PVDklxqDNQ2Xo/S3H4CwFsMuFU1nO6IMdnzCfpFct5Q=
+github.com/OpenListTeam/openlist-wasi-plugin-driver v0.0.0-20251105181311-31306d50eadb h1:nBdwja4mt8WCGEVa0Jmb/Hg5FKRaGmu3SyreuGyrHVk=
+github.com/OpenListTeam/openlist-wasi-plugin-driver v0.0.0-20251105181311-31306d50eadb/go.mod h1:PVDklxqDNQ2Xo/S3H4CwFsMuFU1nO6IMdnzCfpFct5Q=
 github.com/OpenListTeam/resty-tinygo/v3 v3.0.0-20251013065911-8fff8b24c719 h1:uSIzfFHwBoZ65rvKcqRC2ep+GB0DP90WKsvdzEQmCQE=
 github.com/OpenListTeam/resty-tinygo/v3 v3.0.0-20251013065911-8fff8b24c719/go.mod h1:4MGW3n/DUM62Y3u/oUlyNIRASyZK7/PJnQGPQFBI+i8=
 github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=

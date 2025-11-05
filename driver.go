@@ -18,9 +18,7 @@ import (
 )
 
 func init() {
-	openlistwasiplugindriver.CreateDriver = func() openlistwasiplugindriver.Driver {
-		return &BaiduShare{}
-	}
+	openlistwasiplugindriver.RegisterDriver(&BaiduShare{})
 }
 
 type Addition struct {
